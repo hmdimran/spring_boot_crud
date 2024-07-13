@@ -1,5 +1,6 @@
 package com.himran.crud.model;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -10,6 +11,10 @@ import java.util.Date;
 public class UserDto {
     @NotEmpty(message = "The Name Is Required")
     private String user_name;
+
+    @Email
+    @NotEmpty(message = "The Name Is Required")
+    private String email;
     @NotEmpty(message = "The Designation Is Required")
     private String designation;
     @Min(0)
@@ -26,6 +31,14 @@ public class UserDto {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getDesignation() {

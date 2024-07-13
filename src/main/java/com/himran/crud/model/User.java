@@ -11,6 +11,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
     private String user_name;
+
+    private String email;
     private String designation;
     private double salary;
     @Column(columnDefinition = "TEXT")
@@ -20,6 +22,15 @@ public class User {
 
     public Long getUser_id() {
         return user_id;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setUser_id(Long user_id) {

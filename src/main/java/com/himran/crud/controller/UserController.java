@@ -2,11 +2,13 @@ package com.himran.crud.controller;
 
 import com.himran.crud.model.User;
 import com.himran.crud.model.UserDto;
+import com.himran.crud.service.MailService;
 import com.himran.crud.service.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +31,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private MailService mailService;
 
     @GetMapping({"","/"})
     public String showProductList(Model model){
@@ -74,6 +79,7 @@ public class UserController {
 
         User user = new User();
         user.setUser_name(userDto.getUser_name());
+        user.setEmail(userDto.getEmail());
         user.setDesignation(userDto.getDesignation());
         user.setSalary(userDto.getSalary());
         user.setAbout(userDto.getAbout());
@@ -81,6 +87,17 @@ public class UserController {
         user.setImageFileName(storeImageFileName);
 
         repository.save(user);
+
+        if(!userDto.getEmail().isEmpty()){
+            try{
+                String toMail = userDto.getEmail();
+                String subject = "Congratulations";
+                String body = "Thanks For Connecting With Out Community";
+                mailService.sendMail(toMail,subject,body);
+            }catch (Exception e){
+                System.out.println("Email Sending Problems in UserController "+e.getMessage());
+            }
+        }
 
 
         return "redirect:/users";
@@ -95,6 +112,7 @@ public class UserController {
             UserDto userDto = new UserDto();
 
             userDto.setUser_name(user.getUser_name());
+            userDto.setEmail(user.getEmail());
             userDto.setDesignation(user.getDesignation());
             userDto.setSalary(user.getSalary());
             userDto.setAbout(user.getAbout());
@@ -137,6 +155,7 @@ public class UserController {
             }
 
             user.setUser_name(userDto.getUser_name());
+            user.setEmail(userDto.getEmail());
             user.setDesignation(userDto.getDesignation());
             user.setSalary(userDto.getSalary());
             user.setAbout(userDto.getAbout());

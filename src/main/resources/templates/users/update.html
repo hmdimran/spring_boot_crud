@@ -26,6 +26,13 @@
                 </div>
               </div>
               <div class="row md-3 mb-3">
+                <label class="col-sm-4 col-form-label" for="email">Email</label>
+                <div class="col-sm-8">
+                  <input id="email" class="form-control" th:field="${userDto.email}">
+                  <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="${userDto.email}"></p>
+                </div>
+              </div>
+              <div class="row md-3 mb-3">
                 <label class="col-sm-4 col-form-label" for="designation">Designation</label>
                 <div class="col-sm-8">
                   <input id="designation" class="form-control" th:field="${userDto.designation}">
