@@ -3,6 +3,8 @@ package com.himran.crud.controller;
 import com.himran.crud.model.User;
 import com.himran.crud.model.UserDto;
 import com.himran.crud.service.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -145,6 +147,19 @@ public class UserController {
             System.out.println("Update Function Error " + e.getMessage());
         }
         return "redirect:/users";
+    }
+
+    @GetMapping("/delete")
+    public String userDelete(@RequestParam Long id, HttpSession session){
+        System.out.println(" Deleted ID is "+id);
+       try{
+           User user = repository.findById(id).get();
+           repository.delete(user);
+           session.setAttribute("delete","User Delete Done");
+       }catch (Exception e){
+           System.out.println("User Delete Function Error "+e.getMessage());
+       }
+       return "redirect:/users";
     }
 
 }
