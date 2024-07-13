@@ -32,14 +32,14 @@
                     <td th:text="${user.user_name}"></td>
                     <td th:text="${user.designation}"></td>
                     <td th:text="${user.salary}"></td>
-                    <td th:text="${user.about}"></td>
+                    <td style="width:300px" th:text="${user.about}"></td>
                     <td>
                         <img th:src="@{'images/'+${user.imageFileName}}" alt="User Image" width="100">
                     </td>
                     <td th:text="${user.createdAt.toString().substring(0,10)}"></td>
                     <td>
-                        <a href="" class="btn btn-danger">Delete</a>
-                        <a href="" class="btn btn-secondary">Update</a>
+                        <a th:href="@{/users/update(id=${user.user_id})}" class="btn btn-primary btn-sm">Update</a>
+                        <a th:href="@{/users/delete(id=${user.user_id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure ?')">Delete</a>
                     </td>
                 </tr>
             </tbody>
