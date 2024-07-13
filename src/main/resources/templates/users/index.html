@@ -28,13 +28,13 @@
             </thead>
             <tbody>
                 <tr th:each="user : ${all_users}">
-                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.user_id}"></td>
                     <td th:text="${user.user_name}"></td>
                     <td th:text="${user.designation}"></td>
                     <td th:text="${user.salary}"></td>
                     <td th:text="${user.about}"></td>
                     <td>
-                        <img th:src="@{'/images/'+${user.imageFileName}}" alt="User Image" width="100">
+                        <img th:src="@{'images/'+${user.imageFileName}}" alt="User Image" width="100">
                     </td>
                     <td th:text="${user.createdAt.toString().substring(0,10)}"></td>
                     <td>
